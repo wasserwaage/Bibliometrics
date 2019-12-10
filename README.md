@@ -6,6 +6,13 @@ The [Dimensions](https://www.dimensions.ai/) database was accessed using the [di
 
 _This script was used for bibliometric analysis of publications dating to the early days of light-emitting diodes. This data was used to better understand the advancements of light-emitting diode technology. The research project was jointly undertaken by teams of the University of Minnesota, the University of Harvard and the University of Cambridge. It was [funded by the Alfred P. Sloan foundation](https://sloan.org/grant-detail/8567)._
 
+Request throttling per service:
+
+- Web of Science: [**Standard (ETHZ)**](https://developer.clarivate.com/apis/wos#)
+- Scopus: [**Subscriber (ETHZ)**](https://dev.elsevier.com/api_key_settings.html)
+
+    "20.000 weekly quota at 9 requests per second"
+
 #### Caveats
 
 - The scibliometrics package:
