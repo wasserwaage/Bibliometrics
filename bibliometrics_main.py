@@ -19,6 +19,10 @@ import pandas as pd
 import progress #For progress bars in the console
 import collections # Required for namedtuples data type returned by the ScopusSearch function
 
+# Service
+# =====================================================================
+import time
+
 # =====================================================================
 # =====================================================================
 # Bibliometrics API Script
@@ -58,13 +62,17 @@ print('Found', dout_size, 'paper(s) for search query: >>', query_main, '<<')
 
 
 # Gets results from Scopus as list of namedtuples
-print('Downloading data for query >>', query_main, '<<')
-dout_dld = Scopus(query_main,
-                  refresh=False,
-                  subscriber=True,
-                  view=None,
-                  download=True,
-                  verbose=True)
+start = time.time()
+try:
+    print('Downloading data for query >>', query_main, '<<')
+    dout_dld = Scopus(query_main,
+                      refresh=False,
+                      subscriber=True,
+                      view=None,
+                      download=True,
+                      verbose=True)
+    end = time.time()
+    print('Download complete, elapsed time=', end - start, 'seconds'), print()
 
 # Selects specific database fields to pass to pandas dataframe
 fields_all = ('eid', 'doi', 'pii', 'pubmed_id', 'title', 'subtype',\
