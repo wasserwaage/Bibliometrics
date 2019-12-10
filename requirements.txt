@@ -46,6 +46,7 @@ six==1.13.0
 pytz==2019.3
 numpy==1.17.4
 python-dateutil==2.8.1
+pyarrow==0.15.1 # For feather file format writing
 
 # Progress bar:
 

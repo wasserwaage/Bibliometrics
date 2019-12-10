@@ -11,7 +11,9 @@ _This script was used for bibliometric analysis of publications dating to the ea
 - The scibliometrics package:
    - The readthedocs.io manual must be manually set to latest` for compatibility with the version privided by pip
    - The `config.ini` file storing the API access key is located at `~/.scopus/config.ini`
-   
+
+Downloaded data is stored in the [feather file format](https://blog.rstudio.com/2016/03/29/feather/) for best save and load performance.
+
 Michael Weinold\
 University of Cambridge\
 2019-2020
