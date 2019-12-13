@@ -3,6 +3,7 @@
 
 # pybliometrics config.ini file alias
 config_alias.ini
+.scopus
 
 # PyCharm files
 # See: https://stackoverflow.com/questions/47383383/where-is-my-idea-workspace-xml-file-located
