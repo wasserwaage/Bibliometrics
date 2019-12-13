@@ -16,12 +16,12 @@ import dimcli # For Dimensions
 # Data Science
 # =====================================================================
 import pandas as pd
-import progress #For progress bars in the console
 import collections # Required for namedtuples data type returned by the ScopusSearch function
 
 # Service
 # =====================================================================
 import time
+import os
 
 # =====================================================================
 # =====================================================================
@@ -62,8 +62,8 @@ print('Found', dout_size, 'paper(s) for search query: >>', query_main, '<<')
 
 
 # Gets results from Scopus as list of namedtuples
-start = time.time()
 try:
+    start = time.time()
     print('Downloading data for query >>', query_main, '<<')
     dout_dld = Scopus(query_main,
                       refresh=False,
@@ -71,6 +71,7 @@ try:
                       view=None,
                       download=True,
                       verbose=True)
+finally:
     end = time.time()
     print('Download complete, elapsed time=', end - start, 'seconds'), print()
 
@@ -94,8 +95,7 @@ fields_excluded = tuple(i for i in fields_filtered) # Note that there is no tupl
 
 # Writes list of namedtuples to dataframe
 dout_dataframe = pd.DataFrame.from_records(dout_dld.results,
-                                           columns=fields_all,
-                                           exclude=fields_excluded)
+                                           columns=fields_all)
 
 # Writes data to feather file for best performance
 dout_dataframe.to_feather(os.getcwd()+'/data/scopus/'+query_main)
