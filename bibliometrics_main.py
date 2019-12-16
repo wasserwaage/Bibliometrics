@@ -45,8 +45,7 @@ print('Found', Scopus(query_test_1).get_results_size(), 'paper(s) for search que
 # Modified Query
 # ==============
 
-query_main = 'TITLE-ABS-KEY("GaN" OR "gallium nitride")'
-query_ltd = 'TITLE-ABS-KEY("GaN" OR "gallium nitride") AND PUBYEAR BEF 1950'
+query_main = 'TITLE-ABS-KEY("GaN" OR "gallium nitride") AND SUBJAREA(CENG OR CHEM OR COMP OR EART OR ENER OR ENGI OR ENVI OR MATE OR MATH OR PHYS)'
 
 # API Query
 # ==========================================================
@@ -59,7 +58,6 @@ dout_tmp = Scopus(query_main,
                   download=False)
 dout_size = dout_tmp.get_results_size()
 print('Found', dout_size, 'paper(s) for search query: >>', query_main, '<<')
-
 
 # Gets results from Scopus as list of namedtuples
 try:
@@ -84,14 +82,6 @@ fields_all = ('eid', 'doi', 'pii', 'pubmed_id', 'title', 'subtype',\
                   'volume', 'issueIdentifier', 'article_number', 'pageRange',\
                   'description', 'authkeywords', 'citedby_count', 'openaccess',\
                   'fund_acr', 'fund_no', 'fund_sponsor')
-def fields_included(field):
-    included = ('affiliation_country', 'coverDate')
-    if (field in included):
-        return False
-    else:
-        return True
-fields_filtered = filter(fields_included, fields_all)
-fields_excluded = tuple(i for i in fields_filtered) # Note that there is no tuple comprehension in Python
 
 # Writes list of namedtuples to dataframe
 dout_dataframe = pd.DataFrame.from_records(dout_dld.results,
