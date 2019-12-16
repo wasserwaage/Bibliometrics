@@ -15,10 +15,15 @@ Request throttling per service:
 
 #### Caveats
 
-- The scibliometrics package:
+- The `scibliometrics` package:
    - The readthedocs.io manual must be manually set to latest` for compatibility with the version privided by pip
    - The `config.ini` file storing the API access key is located at `~/.scopus/config.ini`
+- The `DatFrame` split-up script:
+   - The index has to be reset with `DataFrame.reset_index()` prior to writing to a feather file.
+   - All `DataFrame` commands must include the parameter `inplace=True` to overwrite the object operated on. 
+#### Search peculiarities
 
+- The search query "GaN" will yield potentially irrelevant results due to the similarity with the Chinese symbol "干" for "dry". Include only papers from the subject area Physical Sciences.
 #### Databases
 
 Downloaded data is stored in the [feather file format](https://blog.rstudio.com/2016/03/29/feather/) for best save and load performance.
