@@ -27,8 +27,12 @@ import os
 # ==============
 
 tech = 'GaN' # Set technology name
-os.mkdir(os.getcwd()+'/data/scopus/'+tech) # Creates subfolder for database files
-tech_data = os.getcwd()+'/data/scopus/'+tech
+scopus_dir = os.getcwd()+'/data/scopus/'
+tech_dir = scopus_dir+tech
+
+if not os.path.exists(scopus_dir+tech): # Creates subfolder for database files
+    os.makedirs(scopus_dir+tech)
+
 feather_GaN = os.getcwd()+'/data/scopus/TITLE-ABS-KEY("GaN" OR "gallium nitride")'
 
 # Loads dataframe from feather file
@@ -58,10 +62,10 @@ GaN = pd.DataFrame.drop(GaN_raw, axis='columns', columns=list(fields_excluded))
 # ==============
 
 # Searches for year range in coverDate column
-
 year_max = int(GaN['coverDate'].max()[0:4]) # Gets only year from string
 year_min = int(GaN['coverDate'].min()[0:4]) # Gets only year from string
 
+# Writes all column entries from a single year to a new dataframe
 for year in range(year_max - year_min):
 
     year = year + year_min # Sets correct start year
@@ -72,8 +76,16 @@ for year in range(year_max - year_min):
     GaN_tmp.reset_index(drop=True, inplace=True) # Resets index for writing to feather files
     GaN_tmp.to_feather(os.getcwd() + '/data/scopus/' + dbname) # Writes to feather file
 
-def read_all_feathers():
-    flist = os.listdir(tech_data)
+#Reads all single-year databases for inspection
+def read_all_feathers(absdirpath):
+
+    global db_dict = {} # Dictionary of single-year database dataframes
+
+    flist = os.listdir(absdirpath)
     for file in flist:
-        tmp_feather = pd.read_feather(tech_data+file)
-        return tmp_feather
+        tmp_feather = pd.read_feather(absdirpath+file)
+        db_dict['file'] = tmp_feather
+
+    print('Feather files opened from path >>', absdirpath, '<<'), print()
+
+read_all_feathers(tech_dir)
