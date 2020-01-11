@@ -1,0 +1,2 @@
+Scopus Advances search queries:
+TITLE-ABS-KEY ( tritium  AND  lithium )  AND  SUBJAREA ( ceng  OR  chem  OR  comp  OR  ener  OR  engi  OR  envi  OR  mate  OR  math  OR  phys )  AND NOT  SOURCE-ID ( 24043 )

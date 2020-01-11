@@ -45,7 +45,7 @@ print('Found', Scopus(query_test_1).get_results_size(), 'paper(s) for search que
 # Modified Query
 # ==============
 
-query_main = 'TITLE-ABS-KEY("GaN" OR "gallium nitride") AND SUBJAREA(CENG OR CHEM OR COMP OR EART OR ENER OR ENGI OR ENVI OR MATE OR MATH OR PHYS)'
+query_main = 'TITLE-ABS-KEY ( tritium  AND  lithium )  AND  SUBJAREA ( ceng  OR  chem  OR  comp  OR  ener  OR  engi  OR  envi  OR  mate  OR  math  OR  phys )  AND NOT  SOURCE-ID ( 24043 )'
 
 # API Query
 # ==========================================================

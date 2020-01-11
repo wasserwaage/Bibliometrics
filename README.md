@@ -13,6 +13,11 @@ Request throttling per service:
 
     "20.000 weekly quota at 9 requests per second"
 
+#### Manual
+
+- `bibliometrics_main.py` is used to download the results to an advanced Scopus search query.
+- `bibliometrics_db.py` is used to manipulate the downloaded results.
+
 #### Caveats
 
 - The `scibliometrics` package:
