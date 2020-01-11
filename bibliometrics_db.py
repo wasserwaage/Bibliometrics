@@ -58,8 +58,9 @@ fields_excluded = tuple(i for i in fields_filtered) # Note that there is no tupl
 
 GaN = pd.DataFrame.drop(GaN_raw, axis='columns', columns=list(fields_excluded))
 
-# Database Split
-# ==============
+# =====================
+# Database Manipulation
+# =====================
 
 # Searches for year range in coverDate column
 year_max = int(GaN['coverDate'].max()[0:4]) # Gets only year from string
@@ -89,3 +90,4 @@ def read_all_feathers(absdirpath):
     print('Feather files opened from path >>', absdirpath, '<<'), print()
 
 read_all_feathers(tech_dir)
+

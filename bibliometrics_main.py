@@ -2,24 +2,20 @@
 # =====================================================================
 
 # Bibliometrics
-# =====================================================================
+# =============
 import pybliometrics # For Scopus
 from pybliometrics.scopus import ScopusSearch as Scopus
 
-import wos # For Web of Science
-
-import dimcli # For Dimensions
-
 # File Handling
-# =====================================================================
+# =============
 
 # Data Science
-# =====================================================================
+# ============
 import pandas as pd
 import collections # Required for namedtuples data type returned by the ScopusSearch function
 
 # Service
-# =====================================================================
+# =======
 import time
 import os
 
@@ -31,24 +27,22 @@ import os
 # =====================================================================
 # =====================================================================
 
-# =====================================================================
-# Scopus
-# =====================================================================
-
 # Test Query
-# Tests API access by searching for my first publication
+# Tests API access by searching for my first publication.
 # =====================================================================
 
 query_test_1 = 'ABS(hematite) AND AUTH(weinold)'
 print('Found', Scopus(query_test_1).get_results_size(), 'paper(s) for search query: >>', query_test_1, '<<')
 
-# Modified Query
-# ==============
+# Main Query
+# Takes an advanced Scopus search as input from the console.
+# =====================================================================
 
-query_main = 'TITLE-ABS-KEY ( tritium  AND  lithium )  AND  SUBJAREA ( ceng  OR  chem  OR  comp  OR  ener  OR  engi  OR  envi  OR  mate  OR  math  OR  phys )  AND NOT  SOURCE-ID ( 24043 )'
+query_main = str(input('Enter Scopus Advanced Search query:'))
 
 # API Query
-# ==========================================================
+# Downloads results database for search query
+# =====================================================================
 
 # Gets number of results from Scopus
 dout_tmp = Scopus(query_main,
@@ -83,9 +77,16 @@ fields_all = ('eid', 'doi', 'pii', 'pubmed_id', 'title', 'subtype',\
                   'description', 'authkeywords', 'citedby_count', 'openaccess',\
                   'fund_acr', 'fund_no', 'fund_sponsor')
 
+# File Handling
+# Writes to file
+# =====================================================================
+
 # Writes list of namedtuples to dataframe
 dout_dataframe = pd.DataFrame.from_records(dout_dld.results,
                                            columns=fields_all)
 
-# Writes data to feather file for best performance
-dout_dataframe.to_feather(os.getcwd()+'/data/scopus/'+query_main)
+# Writes data to feather file
+try:
+    dout_dataframe.to_feather(os.getcwd() + '/data/scopus/' + query_main)
+finally:
+    print('Writing complete.')

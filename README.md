@@ -15,8 +15,8 @@ Request throttling per service:
 
 #### Manual
 
-- `bibliometrics_main.py` is used to download the results to an advanced Scopus search query.
-- `bibliometrics_db.py` is used to manipulate the downloaded results.
+- `bibliometrics_main.py` is used to download the results to an advanced Scopus search query. It writes the resulting database to a`pandas.DataFrame` and saves it to the directory `/data/scopus` as a feather file. 
+- `bibliometrics_db.py` is used to manipulate the downloaded results. It loads `pandas.DataFrame` from the feather file and XXXX
 
 #### Caveats
 
